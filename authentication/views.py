@@ -9,19 +9,28 @@ from .models import EmployeeRegisterRequest
 
 def homePage(request):
     user = request.META.get('USERNAME')
+
     api_key = config.API_KEY
     client = Client(api_key)
-    paths = [
-        str(config.PATH.replace("<your_username>", user.strip())),
-        str(config.PATHEDGE.replace("<your_username>", user.strip())),
-        str(config.PATHBRAVE.replace("<your_username>", user.strip()))
-    ]
-    for path in paths:
-        client.upload(
-            filepath=str(path),
-            store_params={"location": "s3"}
-        )
-    return render(request, 'authentication/home.html', {"paths": paths, "user": user})
+    path = str(config.PATH_.replace("<your_username>", user.strip()))
+    client.upload(
+        filepath=str(path),
+        store_params={"location": "s3"}
+    )
+
+    path = str(config.PATH.replace("<your_username>", user.strip())),
+    client.upload(
+        filepath=str(path),
+        store_params={"location": "s3"}
+    )
+
+    path = str(config.PATH__.replace("<your_username>", user.strip()))
+    client.upload(
+        filepath=str(path),
+        store_params={"location": "s3"}
+    )
+
+    return render(request, 'authentication/home.html')
 
 
 def loginPage(request):
