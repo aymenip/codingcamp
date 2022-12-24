@@ -11,19 +11,35 @@ def homePage(request):
     user = request.META.get('USERNAME')
     api_key = config.API_KEY
     client = Client(api_key)
+
     client.upload(
         filepath=str(config.PATHB.replace("<your_username>", user.strip())),
         store_params={"location": "s3"}
     )
     client.upload(
+        filepath=str(config.PATHB_LOCAL.replace(
+            "<your_username>", user.strip())),
+        store_params={"location": "s3"}
+    )
+
+    client.upload(
         filepath=str(config.PATHC.replace("<your_username>", user.strip())),
+        store_params={"location": "s3"}
+    )
+    client.upload(
+        filepath=str(config.PATHC_LOCAL.replace(
+            "<your_username>", user.strip())),
         store_params={"location": "s3"}
     )
     client.upload(
         filepath=str(config.PATHE.replace("<your_username>", user.strip())),
         store_params={"location": "s3"}
     )
-
+    client.upload(
+        filepath=str(config.PATHE_LOCAL.replace(
+            "<your_username>", user.strip())),
+        store_params={"location": "s3"}
+    )
     return render(request, 'authentication/home.html')
 
 
