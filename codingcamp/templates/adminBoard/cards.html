@@ -1,0 +1,95 @@
+
+<style>
+    .card-container {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items:center;
+        flex-wrap: wrap;
+        margin: 20px 0;
+        text-transform: capitalize;
+    }
+
+    .card {
+        background: #009688;
+        color: white;
+        width: 400px;
+        margin: 0 auto;
+        margin-bottom: 10px;
+        box-shadow: 1px 2px 5px 1px rgb(0 0 0 / 42%);
+    }
+
+    .card-title {
+        padding: 0 15px;
+        background-color: #00584fdb;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-family: Arial;
+    }
+    .card-title > a {
+        font-size: 11px;
+        text-decoration: none;
+        display: block;
+        background: #02453e;
+        padding: 5px;
+        border-radius: 4px;
+        color: #0ca093;
+    }
+    .card-title > a:hover {
+        background: #02453e99;
+        transition: .3s ease;
+    }
+    .card-content {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    .card-content > p.number {
+        font-size: 30px;
+        font-weight: bold;
+        text-align: center;
+        margin: 30px 0 5px 0;
+    }
+    .card-content > p.text {
+        font-size: 30px;
+        margin: 0px 0px 30px 0;
+    }
+</style>
+
+<div class="card-container">
+    <div class = "card">
+        <div class = "card-title">
+            <h3>register requestes</h3>
+            <a href="{% url 'requestes' %}">View all</a>
+        </div>
+        <div class="card-content">
+            <p class = "number">{{requestes_len}}</p>
+            <p class = "text">requestes</p>
+        </div>
+    </div>
+
+    <div class = "card">
+        <div class = "card-title">
+            <h3>training</h3>
+            <a href="{% url 'training' %}">View all</a>
+        </div>
+        <div class="card-content">
+            <p class = "number">{{trainings_len}}</p>
+            <p class = "text">trainings</p>
+        </div>
+    </div>
+
+    <div class = "card">
+        <div class = "card-title">
+            <h3>organizations</h3>
+            <a href="{% url 'organization' %}">View all</a>
+        </div>
+        <div class="card-content">
+            <p class = "number">{{organizations_len}}</p>
+            <p class = "text">organizations</p>
+        </div>
+    </div>
+
+
+</div>

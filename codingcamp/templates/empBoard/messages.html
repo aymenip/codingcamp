@@ -1,0 +1,106 @@
+{% extends 'empBoard/main.html' %}
+
+{% block centent%}
+<style>
+
+    .table-container.emp {
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        height: 385px;
+        overflow-y: auto;
+        margin-top: 60px;
+    }
+    
+    
+    table {
+        width: 750px;
+        border-collapse: collapse;
+        box-shadow: 0px 1px 7px 2px rgb(0 0 0 / 20%);
+        width: 100%;
+    }
+    
+    tr:nth-of-type(odd) { 
+        background: #00615755; 
+        color: #000;    
+    }
+    
+    th { 
+        background: #006157;
+        color: white; 
+        font-weight: bold; 
+        }
+    
+    td, th { 
+        padding: 10px; 
+        border: 1px solid #ccc; 
+        text-align: left; 
+        font-size: 18px;
+        }
+    
+    @media 
+    only screen and (max-width: 760px),
+    (min-device-width: 768px) and (max-device-width: 1024px)  {
+    
+        table { 
+              width: 100%; 
+              text-transform: capitalize;
+        }
+    
+        table, thead, tbody, th, td, tr { 
+            display: block; 
+        }
+        tr:first-child{
+            display: none;
+        }
+        
+        tr { border: 1px solid #ccc; }
+        
+        td { 
+            border: none;
+            border-bottom: 1px solid #eee; 
+            position: relative;
+            padding-left: 50%; 
+        }
+    
+        td:before { 
+            position: absolute;
+            top: 6px;
+            left: 6px;
+            width: 45%; 
+            padding-right: 10px; 
+            white-space: nowrap;
+            content: attr(data-column);
+            color: #000;
+            font-weight: bold;
+        }
+    
+    }
+</style>
+<div class = "table-container emp">
+    <table>
+        <tr>
+            <th>msg</th>
+            <th>delete</th>
+        </tr>
+
+            {% for msg in msgs %}
+            <tr>
+                <td data-column="message">
+                    you'r {{msg.result}} in {{msg.training_name}}
+                    {% if msg.content_url != "#" %}
+                        that's all informations u need about this training <a href="{{msg.content_url}}" blank="_blank">here<a/>
+                    {% endif %}
+                </td>
+                <td data-column="delete">
+                    <a href = "/message-delete/{{msg.id}}/{{user.id}}">
+                        <i class="fa-solid fa-circle-xmark"></i>
+                    </a>
+                </td>
+            </tr>
+            {% endfor %}
+    </table>
+</div>
+
+
+{% endblock %}

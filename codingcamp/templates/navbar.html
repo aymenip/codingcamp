@@ -1,0 +1,93 @@
+<style>
+    .navbar {
+        background-color: #006157;
+        display: flex;
+        align-items: center;
+        list-style-type: none;
+        justify-content: center;
+        padding: 20px;
+        margin: 0;
+        margin-bottom: 40px;
+        font-size: 20px;
+    }
+    li > a {
+
+        text-decoration: none;
+        color: #fff;
+        text-transform: capitalize;
+        height: 100%;
+        display: block;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 0px 30px;
+    }
+    li > a:hover li{
+        transiton: .3s ease;
+        background-color: #00615733;
+    }
+    #preloader {
+        background-color: black;
+        width: 3000px;
+        height: 100 vh;
+        position: fixed;
+        z-index: 999;
+      }
+</style>
+
+
+<ul class="navbar">
+   
+    {% comment %} {% if user.is_superuser %}
+        <li><a href = '{% url 'admin-panel' %}'>Dashboard</a></li>
+        <li><a href = '{% url 'users' %}'>Users</a></li>
+        <li><a href = '{% url 'training' %}'>training</a></li>
+        <li><a href = '{% url 'organization' %}'>organization</a></li>
+    {% else %}
+        <li><a href = '/emp-dashboard/{{user.id}}'>Dashboard</a></li>
+        <li><a href = '/my-trainings/{{user.id}}'>My trainings</a></li>
+    {% endif %}
+    <li><a href = '{% url 'cataloge' %}'>cataloge</a></li>
+    {% if user.is_authenticated %}
+        <li><a href = '{% url 'logout' %}'>logout</a></li>
+      {%if user.is_superuser %}
+        <li><a href = '{% url 'admin-panel' %}'>admin panel</a></li>
+      {% endif %}
+
+    {% else %}
+      <li><a href = '{% url 'login' %}'>login</a></li>
+      <li><a href = '{% url 'signup' %}'>signup</a></li>
+    {% endif %} {% endcomment %}
+    {% if user.is_authenticated %}
+        {% if user.is_superuser %}
+            <li><a href = '{% url 'admin-panel' %}'>Dashboard</a></li>
+            <li><a href = '{% url 'users' %}'>Users</a></li>
+            <li><a href = '{% url 'training' %}'>training</a></li>
+            <li><a href = '{% url 'organization' %}'>organization</a></li>
+        {% endif %}
+        {% if not user.is_superuser %}
+            <li><a href = '/emp-dashboard/{{user.id}}'>Dashboard</a></li>
+            <li><a href = '/my-trainings/{{user.id}}'>My trainings</a></li>
+            <li><a href = '{% url 'logout' %}'>logout</a></li>
+        {% endif %}
+        <li><a href = '{% url 'cataloge' %}'>cataloge</a></li>
+    {% else %}
+        <li><a href = '{% url 'login' %}'>login</a></li>
+        <li><a href = '{% url 'signup' %}'>signup</a></li>
+    {% endif %}
+    
+
+</ul>
+
+    {% comment %} {% if user.is_authenticated %}
+        {% include 'navbar.html' %}
+        <button type="submit"><a href="{% url 'logout' %}">logout</a></button>
+        {%if user.is_superuser %}
+        <button type="submit"><a href="{% url 'admin-panel' %}">admin panel</a></button>
+        {% endif %}
+        <button type="submit"><a href="#">profile</a></button>
+    {% else %}
+    <h1>Welcome to conding camp</h1>
+    <button type="submit"><a href="{% url 'login' %}">login</a></button>
+    <button type="submit"><a href="{% url 'signup' %}">signup</a></button>
+    {% endif %} {% endcomment %}

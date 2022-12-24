@@ -1,0 +1,124 @@
+{% extends 'cataloge/cataloge.html' %}
+
+{% block content %}
+<style>
+    .soon{
+        height: 328px;
+    }
+    
+    .table-container {
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        height: 350px;
+        overflow-y: auto;
+    }
+    
+    .search {
+        width: 100%;
+    }
+    
+    table {
+        width: 750px;
+        border-collapse: collapse;
+        box-shadow: 0px 1px 7px 2px rgb(0 0 0 / 20%);
+        width: 100%;
+    }
+    
+    tr:nth-of-type(odd) { 
+        background: #00615755; 
+        color: #000;    
+    }
+    
+    th { 
+        background: #006157;
+        color: white; 
+        font-weight: bold; 
+        }
+    
+    td, th { 
+        padding: 10px; 
+        border: 1px solid #ccc; 
+        text-align: left; 
+        font-size: 18px;
+        }
+    
+    @media 
+    only screen and (max-width: 760px),
+    (min-device-width: 768px) and (max-device-width: 1024px)  {
+    
+        table { 
+              width: 100%; 
+              text-transform: capitalize;
+        }
+    
+        table, thead, tbody, th, td, tr { 
+            display: block; 
+        }
+        tr:first-child{
+            display: none;
+        }
+        
+        tr { border: 1px solid #ccc; }
+        
+        td { 
+            border: none;
+            border-bottom: 1px solid #eee; 
+            position: relative;
+            padding-left: 50%; 
+        }
+    
+        td:before { 
+            position: absolute;
+            top: 6px;
+            left: 6px;
+            width: 45%; 
+            padding-right: 10px; 
+            white-space: nowrap;
+            content: attr(data-column);
+            color: #000;
+            font-weight: bold;
+        }
+    
+    }
+</style>
+<div class="soon">
+    test
+</div>
+<div class = "table-container">
+    <div class="search">
+        <form action="" method="POST">
+            <input type="text">
+        </form>
+    </div>
+    <table>
+        <tr>
+            <th>name</th>
+            <th>rate</th>
+            <th>created</th>
+            <th>delete</th>
+            <th>update</th>
+        </tr>
+        {% for organization in organizations %}
+        <tr>
+            <td data-column="name">
+                {{organization.name}}
+            </td>
+            <td data-column="rate">
+                {{organization.rate}}
+            </td>
+            <td data-column="created">
+                {{organization.created}}
+            </td>
+            <td data-column="delete">
+                <i class="fa-solid fa-trash"></i>
+            </td>
+            <td data-column="update">
+                <i class="fa-regular fa-pen-to-square"></i>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+</div>
+{% endblock %}
+

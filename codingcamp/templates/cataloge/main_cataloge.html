@@ -1,0 +1,120 @@
+{% extends 'cataloge/cataloge.html' %}
+{% block content%}
+
+<style>
+.table-container.cataloge{
+    height: 600px;
+    overflow-y: auto;
+}
+table {
+    margin: 0 auto;
+    width: 750px;
+    border-collapse: collapse;
+    box-shadow: 0px 1px 7px 2px rgb(0 0 0 / 20%);
+}
+
+tr:nth-of-type(odd) { 
+    background: #00615755; 
+    color: #000;    
+}
+
+th { 
+    background: #006157;
+    color: white; 
+    font-weight: bold; 
+    }
+
+td, th { 
+    padding: 10px; 
+    border: 1px solid #ccc; 
+    text-align: left; 
+    font-size: 18px;
+    }
+
+@media 
+only screen and (max-width: 760px),
+(min-device-width: 768px) and (max-device-width: 1024px)  {
+
+    table { 
+          width: 100%; 
+          text-transform: capitalize;
+    }
+
+    table, thead, tbody, th, td, tr { 
+        display: block; 
+    }
+    tr:first-child{
+        display: none;
+    }
+    
+    tr { border: 1px solid #ccc; }
+    
+    td { 
+        border: none;
+        border-bottom: 1px solid #eee; 
+        position: relative;
+        padding-left: 50%; 
+    }
+
+    td:before { 
+        position: absolute;
+        top: 6px;
+        left: 6px;
+        width: 45%; 
+        padding-right: 10px; 
+        white-space: nowrap;
+        content: attr(data-column);
+        color: #000;
+        font-weight: bold;
+    }
+
+}
+</style>
+
+<div class = "table-container cataloge">
+    <table>
+        <tr>
+            <th>title</th>
+            {% if user.is_superuser %}
+            <th>content</th>
+            {% endif %}
+            <th>organization</th>
+            <th>rate</th>
+            <th>created</th>
+            <th>requestes</th>
+        </tr>
+        {% for training in trainings %}
+        <tr>
+            <td data-column="title">
+                {{training.title}}
+            </td>
+            {% if user.is_superuser %}
+                <td data-column="content">
+                    <a href="{{training.content.url}}" target="_blank">view</a>
+                </td>
+            {% endif %}
+            <td data-column="organization">
+                {{training.organization.name}}
+            </td>
+            <td data-column="rate">
+                {{training.rate}}
+            </td>
+            <td data-column="created">
+                {{training.created}}
+            </td>
+            <td data-column="requeste">
+                {% if user.is_superuser %}
+                    {% if training.requests == 0 %}
+                        <sapn>no requestes<span>
+                    {% else %}
+                        <a href = "/process/{{training.id}}">process requestes</a>
+                    {% endif %}
+                {% else %}
+                    <a href="/apply/{{training.id}}/{{user.id}}">apply</a>
+                {% endif %}
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+</div>
+{% endblock %}

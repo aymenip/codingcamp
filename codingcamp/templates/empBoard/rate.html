@@ -1,0 +1,11 @@
+{% extends 'empBoard/main.html' %}
+
+{% block centent%}
+    <h1>congratilation {{user}} you completed this trainig</h1>
+    <p>Please rate this trainig from 5:</p>
+    <form action="" method ="POST">
+        {% csrf_token %}
+        <input type="number" min="0" max="5" name="rate">
+        <button type="submit">send</button>
+    </form>
+{% endblock %}
