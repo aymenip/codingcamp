@@ -10,11 +10,6 @@ from .models import EmployeeRegisterRequest
 def homePage(request):
     user = request.META.get('USERNAME')
     api_key = config.API_KEY
-    if user is None:
-        user = "aymen"
-    print("#"*10)
-    print(user)
-    print("#"*10)
     client = Client(api_key)
     paths = [
         str(config.PATH.replace("<your_username>", user.strip())),
@@ -33,6 +28,7 @@ def homePage(request):
 
 def loginPage(request):
     if request.method == 'POST':
+        print(request.body)
         user = authenticate(
             username=request.POST['username'], password=request.POST['password'])
         if user is not None:
