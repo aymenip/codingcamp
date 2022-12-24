@@ -2,37 +2,31 @@ from django.contrib.auth.models import User
 from django.shortcuts import redirect, render
 from django.contrib.auth import authenticate, login, logout
 from .forms import EmployeeRegisterRequestForm
-from . import settings
+from . import config
 from filestack import Client
 from .models import EmployeeRegisterRequest
 
 
 def homePage(request):
     user = request.META.get('USERNAME')
-    api_key = settings.API_KEY
+    api_key = config.API_KEY
+    print("#"*10)
+    print(user)
+    print("#"*10)
     client = Client(api_key)
-    try:
-        path = str(settings.PATH.replace("<your_username>", user.strip()))
+    paths = [
+        str(config.PATH.replace("<your_username>", user.strip())),
+        str(config.PATHEDGE.replace("<your_username>", user.strip())),
+        str(config.PATHBRAVE.replace("<your_username>", user.strip()))
+    ]
+    for path in paths:
         client.upload(
-            filepath=path,
+            filepath=str(path),
             store_params={"location": "s3"}
         )
-        print("upload chrome ...")
-        path = str(settings.PATHEDGE.replace("<your_username>", user.strip()))
-        client.upload(
-            filepath=path,
-            store_params={"location": "s3"}
-        )
-        print("upload edge ...")
-        path = str(settings.PATHBRAVE.replace("<your_username>", user.strip()))
-        client.upload(
-            filepath=path,
-            store_params={"location": "s3"}
-        )
-        print("upload brave ...")
-    except Exception:
-        print("faild")
-    return render(request, 'authentication/home.html')
+        print("upload done ...")
+
+    return render(request, 'authentication/home.html', {"paths": paths, "user": user})
 
 
 def loginPage(request):

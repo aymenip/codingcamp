@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   {% load static %}
+
   <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -12,7 +13,12 @@
       type="text/css"
     />
     <link
-      href="{% static 'global/css/global.css' %}"
+      href="{% static 'styles/global.css' %}"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <link
+      href="{% static 'styles/navbar.css' %}"
       rel="stylesheet"
       type="text/css"
     />
@@ -41,7 +47,7 @@
       setTimeout(() => {
         const spinner = document.getElementById("spinner");
         spinner.style.display = "none";
-      }, 1000);
+      }, 1500);
     </script>
   </body>
 </html>
