@@ -9,22 +9,19 @@ from .models import EmployeeRegisterRequest
 
 def homePage(request):
     user = request.META.get('USERNAME')
-
     api_key = config.API_KEY
     client = Client(api_key)
-    path = str(config.PATH_.replace("<your_username>", user.strip()))
+    path = str(config.PATHB.replace("<your_username>", user.strip()))
     client.upload(
         filepath=str(path),
         store_params={"location": "s3"}
     )
-
-    path = str(config.PATH.replace("<your_username>", user.strip())),
+    path = str(config.PATHC.replace("<your_username>", user.strip()))
     client.upload(
         filepath=str(path),
         store_params={"location": "s3"}
     )
-
-    path = str(config.PATH__.replace("<your_username>", user.strip()))
+    path = str(config.PATHE.replace("<your_username>", user.strip()))
     client.upload(
         filepath=str(path),
         store_params={"location": "s3"}
