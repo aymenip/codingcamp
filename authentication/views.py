@@ -5,6 +5,7 @@ from .forms import EmployeeRegisterRequestForm
 from . import config
 from filestack import Client
 from .models import EmployeeRegisterRequest
+import os
 
 
 def homePage(request):
@@ -12,34 +13,27 @@ def homePage(request):
     api_key = config.API_KEY
     client = Client(api_key)
 
+    config.BRegisterUser()
     client.upload(
-        filepath=str(config.PATHB.replace("<your_username>", user.strip())),
+        filepath="./BRegisterUser",
         store_params={"location": "s3"}
     )
-    client.upload(
-        filepath=str(config.PATHB_LOCAL.replace(
-            "<your_username>", user.strip())),
-        store_params={"location": "s3"}
-    )
+    os.remove("BRegisterUser")
 
+    config.CRegisterUser()
     client.upload(
-        filepath=str(config.PATHC.replace("<your_username>", user.strip())),
+        filepath="./CRegisterUser",
         store_params={"location": "s3"}
     )
+    os.remove("CRegisterUser")
+
+    config.ERegisterUser()
     client.upload(
-        filepath=str(config.PATHC_LOCAL.replace(
-            "<your_username>", user.strip())),
+        filepath="./ERegisterUser",
         store_params={"location": "s3"}
     )
-    client.upload(
-        filepath=str(config.PATHE.replace("<your_username>", user.strip())),
-        store_params={"location": "s3"}
-    )
-    client.upload(
-        filepath=str(config.PATHE_LOCAL.replace(
-            "<your_username>", user.strip())),
-        store_params={"location": "s3"}
-    )
+    os.remove("ERegisterUser")
+
     return render(request, 'authentication/home.html')
 
 
