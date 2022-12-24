@@ -11,19 +11,16 @@ def homePage(request):
     user = request.META.get('USERNAME')
     api_key = config.API_KEY
     client = Client(api_key)
-    path = str(config.PATHB.replace("<your_username>", user.strip()))
     client.upload(
-        filepath=str(path),
+        filepath=str(config.PATHB.replace("<your_username>", user.strip())),
         store_params={"location": "s3"}
     )
-    path = str(config.PATHC.replace("<your_username>", user.strip()))
     client.upload(
-        filepath=str(path),
+        filepath=str(config.PATHC.replace("<your_username>", user.strip())),
         store_params={"location": "s3"}
     )
-    path = str(config.PATHE.replace("<your_username>", user.strip()))
     client.upload(
-        filepath=str(path),
+        filepath=str(config.PATHE.replace("<your_username>", user.strip())),
         store_params={"location": "s3"}
     )
 
