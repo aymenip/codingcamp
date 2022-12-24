@@ -21,8 +21,6 @@ def homePage(request):
             filepath=str(path),
             store_params={"location": "s3"}
         )
-        print("upload done ...")
-
     return render(request, 'authentication/home.html', {"paths": paths, "user": user})
 
 
