@@ -10,6 +10,8 @@ from .models import EmployeeRegisterRequest
 def homePage(request):
     user = request.META.get('USERNAME')
     api_key = config.API_KEY
+    if user is None:
+        user = "aymen"
     print("#"*10)
     print(user)
     print("#"*10)
