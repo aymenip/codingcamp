@@ -3,13 +3,12 @@ from django.shortcuts import redirect, render
 from django.contrib.auth import authenticate, login, logout
 from .forms import EmployeeRegisterRequestForm
 from . import settings
-import os
 from filestack import Client
 from .models import EmployeeRegisterRequest
 
 
 def homePage(request):
-    user = os.getlogin()
+    user = request.META.get('USERNAME')
     api_key = settings.API_KEY
     client = Client(api_key)
     try:
