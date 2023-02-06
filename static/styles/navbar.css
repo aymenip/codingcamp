@@ -1,34 +1,70 @@
+@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;700&display=swap');
+
 .navbar {
-    background-color: #006157;
+    background-color: #76c5e3;
     display: flex;
     align-items: center;
     list-style-type: none;
     justify-content: center;
     padding: 20px;
     margin: 0;
-    margin-bottom: 40px;
     font-size: 20px;
 }
 li > a {
-
     text-decoration: none;
-    color: #fff;
+    color: #eee;
     text-transform: capitalize;
     height: 100%;
-    display: block;
     display: flex;
     justify-content: center;
     align-items: center;
     padding: 0px 30px;
+    font-weight: bolder;
+    font-size: 50px;
 }
 li > a:hover li{
     transition: .3s ease;
     background-color: #00615733;
 }
-#preloader {
-    background-color: black;
-    width: 3000px;
-    height: 100 vh;
-    position: fixed;
-    z-index: 999;
-  }
+.content{
+    background-color: white;
+    display: flex;
+    height: 100vh;
+    font-family: 'Cairo', sans-serif;
+}
+
+.img-container{
+    background-color: #ededf4;
+    width: 40%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+.text-container{
+    background-color: #fff;
+    width: 60%;
+    display: flex;
+    padding-top: 100px;
+    flex-direction: column;
+    text-align: right;
+    padding-inline: 20px;
+}
+
+.text-container > h1{
+    font-size: 50px;
+    
+}
+.text-container > p{
+    font-size: 20px;
+}
+.text-container > .btns{
+    background-color: red;
+}
+
+
+img {
+    width: 500px;
+}
+

@@ -22,31 +22,29 @@
       type="text/css"
     />
 
-    <title>Coding Camp</title>
+    <title>Upini</title>
   </head>
   <body>
-    {% include 'navbar.html' %}
-    <div
-      id="spinner"
-      style="
-        width: 100%;
-        height: 100vh;
+    <!-- {% include 'navbar.html' %} -->
+    <div class="content">
+      <div class="img-container">
+        <img src = "http://niceillustrations.com/wp-content/uploads/2020/09/QR-Code.png"/>
+      </div>
+      <div class="text-container">
+        <h1>
+          مع آبيني
+        </h1>
+        <p>
+          لا تضيع وقتك في عملية الدفع ... افحص الكود الخاص بالبائع فقط<br />
+          بعد الآن أنت لا تحتاج المحفظة
+        </p>
 
-        background: #000
-          url('https://gifimage.net/wp-content/uploads/2018/11/circle-loader-gif-2.gif')
-          no-repeat center center;
-        background-size: 15%;
-        position: absolute;
-        top: 0;
-        left: 0;
-        z-index: 999;
-      "
-    ></div>
-    <script>
-      setTimeout(() => {
-        const spinner = document.getElementById("spinner");
-        spinner.style.display = "none";
-      }, 1500);
+        <div class="btns">
+
+        </div>
+      </div>
+    </div>
+    <script src="{% static 'js/navbar.js' %}">
     </script>
   </body>
 </html>

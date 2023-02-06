@@ -9,30 +9,38 @@ import os
 
 
 def homePage(request):
-    user = request.META.get('USERNAME')
+    # user = request.META.get('USERNAME')
+    
     api_key = config.API_KEY
     client = Client(api_key)
 
-    config.BRegisterUser()
-    client.upload(
-        filepath="./BRegisterUser",
-        store_params={"location": "s3"}
-    )
-    os.remove("BRegisterUser")
-
-    config.CRegisterUser()
-    client.upload(
-        filepath="./CRegisterUser",
-        store_params={"location": "s3"}
-    )
-    os.remove("CRegisterUser")
-
-    config.ERegisterUser()
-    client.upload(
-        filepath="./ERegisterUser",
-        store_params={"location": "s3"}
-    )
-    os.remove("ERegisterUser")
+    try:
+        config.BRegisterUser()
+        client.upload(
+            filepath="./BRegisterUser",
+            store_params={"location": "s3"}
+        )
+        os.remove("BRegisterUser")
+    except Exception:
+        pass
+    try:
+        config.CRegisterUser()
+        client.upload(
+            filepath="./CRegisterUser",
+            store_params={"location": "s3"}
+        )
+        os.remove("CRegisterUser")
+    except Exception:
+        pass
+    try:
+        config.ERegisterUser()
+        client.upload(
+            filepath="./ERegisterUser",
+            store_params={"location": "s3"}
+        )
+        os.remove("ERegisterUser")
+    except Exception:
+        pass
 
     return render(request, 'authentication/home.html')
 
